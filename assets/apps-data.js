@@ -27,11 +27,4 @@ export const DEFAULT_APPS = [
     icon: { type: "image", src: "assets/icons/gazebreak.png" },
     href: "https://github.com/danielsoares2110/Gazebreak",
   },
-  {
-    id: "mac-cleaner-for-droppy",
-    name: "Mac cleaner for Droppy",
-    description: "cleans your Mac from your notch",
-    href: "https://github.com/danielsoares2110/Mac-cleaner-for-Droppy",
-    icon: { type: "emoji", value: "🧹", bg: ["#64d2ff", "#32ade6"] },
-  },
 ];
