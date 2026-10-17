@@ -1,0 +1,287 @@
+/* ==========================================================================
+   danny.com — app showcase
+   ========================================================================== */
+
+:root {
+  --bg: #f1f1ef;
+  --bg-soft: #f6f6f4;
+  --card: #ffffff;
+  --ink: #1d1d1f;
+  --ink-soft: #8e8e93;
+  --hairline: #e8e8e4;
+  --accent: #0a84ff;
+  --accent-ink: #0071e3;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.05), 0 16px 40px rgba(0, 0, 0, 0.09);
+  --radius-card: 30px;
+  --radius-icon: 22px;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Inter,
+    system-ui, sans-serif;
+
+  /* Liquid Glass material. The SVG refraction filter lives inline in
+     index.html (#lg-filter); app.js toggles the svg-glass class when the
+     browser can actually run it, so this var degrades to plain blur. */
+  --glass-frost: hsl(0 0% 100% / 0.38);
+  --glass-filter: blur(18px) saturate(135%);
+  --glass-edge: inset 0 0 2px 1px hsl(0 0% 100% / 0.55),
+    inset 0 0 10px 4px hsl(0 0% 100% / 0.22),
+    inset 0 4px 16px hsl(240 12% 8% / 0.04),
+    inset 0 8px 24px hsl(240 12% 8% / 0.04),
+    inset 0 6px 56px hsl(240 12% 8% / 0.04);
+}
+
+html.svg-glass {
+  --glass-filter: url(#lg-filter) blur(2px) saturate(140%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161618;
+    --bg-soft: #1d1d20;
+    --card: #212124;
+    --ink: #f2f2f0;
+    --ink-soft: #94949a;
+    --hairline: #303034;
+    --accent: #0a84ff;
+    --accent-ink: #4aa8ff;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+    --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.35), 0 16px 40px rgba(0, 0, 0, 0.45);
+    --glass-frost: hsl(0 0% 0% / 0.42);
+    --glass-edge: inset 0 0 2px 1px hsl(0 0% 100% / 0.26),
+      inset 0 0 10px 4px hsl(0 0% 100% / 0.10),
+      inset 0 4px 16px hsl(240 40% 2% / 0.20),
+      inset 0 8px 24px hsl(240 40% 2% / 0.20),
+      inset 0 6px 56px hsl(240 40% 2% / 0.20);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* the displacement-filter <svg> must stay in the DOM (not display:none) for
+   url(#lg-filter) to resolve, but it should occupy nothing */
+.glassdefs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* the closed Dev Panel sits off-canvas to the right; keep it from
+     creating phantom horizontal scroll on narrow screens */
+  overflow-x: clip;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 56px 40px 120px;
+}
+
+/* --- Identity row -------------------------------------------------------- */
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 40px;
+  padding: 0 6px;
+}
+
+.identity__avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  object-fit: cover;
+  flex: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.identity__name {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+/* --- Grid ---------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+  gap: 28px;
+}
+
+/* --- Card ---------------------------------------------------------------- */
+
+.card {
+  background: var(--glass-frost);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  border-radius: var(--radius-card);
+  box-shadow: var(--glass-edge), var(--shadow-card);
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: card-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glass-edge), var(--shadow-card-hover);
+}
+
+.card:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.card--static {
+  cursor: default;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+}
+
+.card__icon {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-icon);
+  flex: none;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card__icon--tile {
+  display: grid;
+  place-items: center;
+  font-size: 42px;
+  line-height: 1;
+  box-shadow: none;
+}
+
+.card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.card__body::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.card__badge {
+  float: left;
+  margin: 3px 22px 5px 0;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  padding: 10px 20px;
+  border-radius: 999px;
+  box-shadow: 0 2px 7px rgba(10, 132, 255, 0.3);
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__desc {
+  margin: 0;
+  text-align: right;
+  font-size: 17px;
+  line-height: 1.36;
+  letter-spacing: -0.012em;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+/* --- Empty state --------------------------------------------------------- */
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 90px 20px;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+.empty strong {
+  display: block;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    padding: 34px 18px 90px;
+  }
+  .card {
+    padding: 20px;
+    gap: 16px;
+    border-radius: 22px;
+  }
+  .card__icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+  }
+  .card__icon--tile {
+    font-size: 28px;
+  }
+  .card__badge {
+    font-size: 13px;
+    padding: 8px 16px;
+    margin: 2px 14px 3px 0;
+  }
+  .card__desc {
+    text-align: left;
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

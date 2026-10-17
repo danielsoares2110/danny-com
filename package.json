@@ -1,0 +1,11 @@
+{
+  "name": "danny-com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "danny.com — app showcase with a hidden dev spot",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 4321",
+    "test": "node tests/dev-spot.test.mjs"
+  }
+}
