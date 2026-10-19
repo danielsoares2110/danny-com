@@ -27,4 +27,12 @@ export const DEFAULT_APPS = [
     icon: { type: "image", src: "assets/icons/gazebreak.png" },
     href: "https://github.com/danielsoares2110/Gazebreak",
   },
+  {
+    id: "eufymake-sender",
+    name: "eufyMake sender",
+    description:
+      "A tiny native macOS app for the AnkerMake M5 / M5C that does exactly three things: send a G-code file, show the printer's camera, and show the temperatures.",
+    icon: { type: "image", src: "assets/icons/eufymake.png" },
+    href: "https://github.com/danielsoares2110/eufyMake-sender",
+  },
 ];
