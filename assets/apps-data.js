@@ -12,32 +12,6 @@ export const SITE = {
 
 export const DEFAULT_APPS = [
   {
-    id: "mounty",
-    name: "Mounty",
-    description:
-      "Mounty is an app that ejects your volumes when you close finder but mounts them when you open finder.",
-    icon: { type: "image", src: "assets/icons/mounty.png" },
-    href: "https://github.com/danielsoares2110/Mounty",
-  },
-  {
-    id: "gazebreak",
-    name: "GazeBreak",
-    description:
-      "A lightweight, native macOS focus timer for the 20-20-20 rule. Work, then look away and rest your eyes.",
-    icon: { type: "image", src: "assets/icons/gazebreak.png" },
-    href: "https://github.com/danielsoares2110/Gazebreak",
-  },
-  {
-    id: "eufymake-sender",
-    name: "eufyMake sender",
-    description:
-      "A tiny native macOS app for the AnkerMake M5 / M5C that does exactly three things: send a G-code file, show the printer's camera, and show the temperatures.",
-    icon: { type: "image", src: "assets/icons/eufymake.png" },
-    href: "https://github.com/danielsoares2110/eufyMake-sender",
-  },
-];
-export const DEFAULT_APPS = [
-  {
     "id": "mounty",
     "name": "Mounty",
     "description": "Mounty is an app that ejects your volumes when you close finder but mounts them when you open finder.",
