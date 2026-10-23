@@ -50,5 +50,16 @@ export const DEFAULT_APPS = [
       "src": "assets/icons/springtail.png"
     },
     "href": "https://github.com/danielsoares2110/Springtail-slicer"
+  },
+  {
+    "id": "termifull",
+    "name": "Termifull",
+    "description": "A very simple customizable terminal app",
+    "icon": {
+      "type": "image",
+      "src": "assets/icons/termifull.png"
+    },
+    "href": "https://github.com/danielsoares2110/Termifull",
+    "emoji": "🛠️"
   }
 ];
